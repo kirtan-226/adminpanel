@@ -1,0 +1,65 @@
+/* Set some basic styles for the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  h1 {
+    margin: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Style the "add" button */
+  .btn {
+    display: inline-block;
+    background-color: #35bbdc;
+    color: #fff;
+    align-items:center;
+    padding: 12px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 20px;
+  }
+  
+  .btn:hover {
+    background-color: #2373c8;
+  }
+  
+  .btn:active {
+    background-color: #21bd99;
+  }
+  
+  
+  .btn2 {
+    display: inline-block;
+    background-color: #35bbdc;
+    color: #fff;
+    align-items:inherit;
+    padding: 4px 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 20px;
+  }
+  
+  .btn2:hover {
+    background-color: #2373c8;
+  }
+  
+  .btn2:active {
+    background-color: #21bd99;
+  }
+  
+  
