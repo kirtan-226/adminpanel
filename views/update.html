@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style3.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/action/update" method="post">
+    <input type="hidden" id="id" name="id" value="<%=id%>" readonly><br>
+    <label for="name">Enter head_name:</label>
+    <input type="text" id="name" name="name" value="<%=devotee.name%>"><br>
+        <label for="category_id">category</label>
+        <select name="category_id" id="category_id" value="<%=devotee.category%>">
+            <option value="">Select</option>
+            <option value="1">ND</option>
+            <option value="2">SN</option>
+            <option value="3">NR</option>
+            <option value="4">S</option>
+            <option value="5">SS</option>
+            <option value="6">SK</option>
+            <option value="7">GK</option>
+            <option value="8">SSPN</option>
+            <option value="9">IT</option>
+            <option value="10">KOS</option>
+            <option value="11">DN</option>
+            <option value="12">None</option><br>
+        </select>
+       <br> <label for="birthdate">Enter birthdate</label>
+        <input type="date" id="birthdate" name="birthdate" value="<%=devotee.birthdate%>"><br>
+        <label for="occupation">occupation</label>
+        <select name="occupation_id" id="occupation_id" value="<%=devotee.occupation%>"required>
+            <option value="">Select</option>
+            <option value="1">Job</option>
+            <option value="2">Business</option> 
+            <option value="3">Housewife</option>
+            <option value="4">Study</option>
+            <option value="5">None</option>
+        </select><br>
+        <div id="shift_id" style="display:none;">
+          <label for="company_name">company_name</label>
+          <input type="text" id="company_name" name ="company_name" value="<%=devotee.company_name%>"><br>
+            <label for="shift_id">Enter shift:</label>
+            <select name="shift_id" id="shift_id" value="<%=devotee.shift%>">
+                <option value="5">Select</option>
+                <option value="1">first</option>
+                <option value="2">second</option>
+                <option value="3">night</option>
+                <option value="4">general</option>
+            </select><br>
+            <label for="change_id">enter time for change</label>
+            <select name="change_id" id="change_id" value="<%=devotee.change%>">
+              <option value="4">select</option>
+              <option value="1">week</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select><br>
+            </select>
+        </div>
+    
+        <div id="study_id" style="display:none;">
+            <label for="study_id">Enter study ID:</label>
+            <select name="study_id" id="study_id" value="<%=devotee.study%>">
+                <option value="14">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">Graduation/post-graduation</option>
+            </select><br>
+        </div>
+    
+        <label for="address">Enter address:</label>
+        <input type="text" id="address" name="address" value="<%=devotee.address%>"><br>
+        <label for="phone_number">Enter phone number:</label>
+        <input type="text" id="phone_number" name="phone_number" value="<%=devotee.phone_number%>"" required pattern="[789][0-9]{9}">
+        <input type="submit">
+      </form>
+        <script>
+            // Show/hide dropdown based on selected option
+            const occupationDropdown = document.getElementById("occupation_id");
+            const shiftDropdown = document.getElementById("shift_id");
+            const studyDropdown = document.getElementById("study_id");
+    
+            occupationDropdown.addEventListener("change", function() {
+                if (occupationDropdown.value === "1") {
+                    shiftDropdown.style.display = "block";
+                    studyDropdown.style.display = "none";
+                } else if (occupationDropdown.value === "4") {
+                    studyDropdown.style.display = "block";
+                    shiftDropdown.style.display = "none";
+                } else {
+                    shiftDropdown.style.display = "none";
+                    studyDropdown.style.display = "none";
+                }
+              })
+            </script>
+
+</body>
+</html>

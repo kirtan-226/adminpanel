@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Family Details</title>
+  </head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style2.css">
+  <body>
+    <h1>Family Details</h1>
+    <a href="/family/<%=mandal_id%>/add-family/" class="btn">add</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>address</th>
+          <th>phone</th>
+          <th>view</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% html_data.forEach(row => { %>
+          <tr>
+            <td><%= row.name %></td>
+            <td><%= row.address %></td>
+            <td><%= row.phone_number %></td>
+            <td> <a href="/member/<%=row.id%>" class="btn2">View</a></td>
+            <td> <a href="delete/<%= row.id%>" class="btn2">Delete</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
