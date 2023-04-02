@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 04:33 PM
+-- Generation Time: Apr 02, 2023 at 04:46 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,6 +45,35 @@ INSERT INTO `admin` (`username`, `password`, `created_at`, `updated_at`, `delete
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category`) VALUES
+(1, 'ND'),
+(2, 'SN'),
+(3, 'NR'),
+(4, 'S'),
+(5, 'SS'),
+(6, 'SK'),
+(7, 'GK'),
+(8, 'SSPN'),
+(9, 'IT'),
+(10, 'KOS'),
+(11, 'DN'),
+(12, 'none');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `change_id`
 --
 
@@ -72,11 +101,13 @@ INSERT INTO `change_id` (`id`, `change`) VALUES
 CREATE TABLE `devotee` (
   `id` int(11) NOT NULL,
   `mandal_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `birthdate` date DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `relation_id` int(11) NOT NULL DEFAULT 1,
   `occupation_id` int(11) DEFAULT NULL,
+  `company_name` varchar(255) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `study_id` int(11) DEFAULT NULL,
@@ -86,6 +117,13 @@ CREATE TABLE `devotee` (
   `deleted_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `devotee`
+--
+
+INSERT INTO `devotee` (`id`, `mandal_id`, `category_id`, `name`, `birthdate`, `age`, `relation_id`, `occupation_id`, `company_name`, `phone_number`, `address`, `study_id`, `shift_id`, `change_id`, `created_at`, `deleted_at`, `updated_at`) VALUES
+(1, 1, 5, 'Kirtan J Limbachiya', '2001-06-22', 21, 1, 4, '', '9106617646', 'Luvkush appartment', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,6 +135,7 @@ CREATE TABLE `devotee_family` (
   `id` int(11) NOT NULL,
   `devotee_id` int(11) NOT NULL,
   `mandal_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `relation_id` int(11) NOT NULL DEFAULT 1,
   `birthdate` date DEFAULT NULL,
@@ -104,6 +143,7 @@ CREATE TABLE `devotee_family` (
   `address` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `occupation_id` int(11) DEFAULT 4,
+  `company_name` varchar(255) NOT NULL,
   `study_id` int(11) DEFAULT 14,
   `shift_id` int(11) DEFAULT NULL,
   `change_id` int(11) NOT NULL,
@@ -111,6 +151,13 @@ CREATE TABLE `devotee_family` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `devotee_family`
+--
+
+INSERT INTO `devotee_family` (`id`, `devotee_id`, `mandal_id`, `category_id`, `name`, `relation_id`, `birthdate`, `age`, `address`, `phone_number`, `occupation_id`, `company_name`, `study_id`, `shift_id`, `change_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 5, 'Kirtan J Limbachiya', 1, '2001-06-22', 21, 'Luvkush appartment', '9106617646', 4, '', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -252,6 +299,12 @@ INSERT INTO `study` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VAL
 --
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `change_id`
 --
 ALTER TABLE `change_id`
@@ -267,7 +320,8 @@ ALTER TABLE `devotee`
   ADD KEY `study_foreign_key` (`study_id`),
   ADD KEY `shift_id_foreign_key` (`shift_id`),
   ADD KEY `relation_id_foriegn_key` (`relation_id`),
-  ADD KEY `change_id_foreign_key` (`change_id`);
+  ADD KEY `change_id_foreign_key` (`change_id`),
+  ADD KEY `category_id_foriegn_key` (`category_id`);
 
 --
 -- Indexes for table `devotee_family`
@@ -279,7 +333,8 @@ ALTER TABLE `devotee_family`
   ADD KEY `occupation_foreign_key` (`occupation_id`),
   ADD KEY `shift_foreign_key` (`shift_id`),
   ADD KEY `study_foreign_key` (`study_id`),
-  ADD KEY `change_foreign_key` (`change_id`);
+  ADD KEY `change_foreign_key` (`change_id`),
+  ADD KEY `category_id2_foriegn_key` (`category_id`);
 
 --
 -- Indexes for table `mandal`
@@ -316,6 +371,12 @@ ALTER TABLE `study`
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `change_id`
 --
 ALTER TABLE `change_id`
@@ -325,13 +386,13 @@ ALTER TABLE `change_id`
 -- AUTO_INCREMENT for table `devotee`
 --
 ALTER TABLE `devotee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `devotee_family`
 --
 ALTER TABLE `devotee_family`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mandal`
@@ -371,6 +432,7 @@ ALTER TABLE `study`
 -- Constraints for table `devotee`
 --
 ALTER TABLE `devotee`
+  ADD CONSTRAINT `category_id_foriegn_key` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `change_id_foreign_key` FOREIGN KEY (`change_id`) REFERENCES `change_id` (`id`),
   ADD CONSTRAINT `occupation_id_foriegn_key` FOREIGN KEY (`occupation_id`) REFERENCES `occupation` (`id`),
   ADD CONSTRAINT `relation_id_foriegn_key` FOREIGN KEY (`relation_id`) REFERENCES `relation` (`id`),
@@ -381,6 +443,7 @@ ALTER TABLE `devotee`
 -- Constraints for table `devotee_family`
 --
 ALTER TABLE `devotee_family`
+  ADD CONSTRAINT `category_id2_foriegn_key` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `change_foreign_key` FOREIGN KEY (`change_id`) REFERENCES `change_id` (`id`),
   ADD CONSTRAINT `occupation_id2_foriegn_key` FOREIGN KEY (`occupation_id`) REFERENCES `occupation` (`id`),
   ADD CONSTRAINT `relation_id2_foriegn_key` FOREIGN KEY (`relation_id`) REFERENCES `relation` (`id`),
