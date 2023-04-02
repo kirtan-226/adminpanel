@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 04:46 PM
+-- Generation Time: Apr 02, 2023 at 07:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -157,7 +157,8 @@ CREATE TABLE `devotee_family` (
 --
 
 INSERT INTO `devotee_family` (`id`, `devotee_id`, `mandal_id`, `category_id`, `name`, `relation_id`, `birthdate`, `age`, `address`, `phone_number`, `occupation_id`, `company_name`, `study_id`, `shift_id`, `change_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 5, 'Kirtan J Limbachiya', 1, '2001-06-22', 21, 'Luvkush appartment', '9106617646', 4, '', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL);
+(1, 1, 1, 5, 'Kirtan J Limbachiya', 1, '2001-06-22', 21, 'Luvkush appartment', '9106617646', 4, '', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL),
+(2, 1, 1, 6, 'Jagdishbhai', 2, '1973-10-05', 49, 'Luvkush appartment', '8734866391', 1, 'Sanofi', 14, 2, 4, '2023-04-02 20:50:20', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -392,7 +393,7 @@ ALTER TABLE `devotee`
 -- AUTO_INCREMENT for table `devotee_family`
 --
 ALTER TABLE `devotee_family`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mandal`
