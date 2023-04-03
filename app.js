@@ -16,13 +16,13 @@ const printRouter = require('./routes/print')
 const app = express();
 
 // middleware to check if user is authenticated
-// const authUser = (req, res, next) => {
-//   if (req.session && req.session.authenticated) {
-//     next();
-//   } else {
-//     res.redirect('/login');
-//   }
-// };
+const authUser = (req, res, next) => {
+  if (req.session && req.session.authenticated) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,24 +36,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.use(session({
-//   secret: 'your-secret-key',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: false },
-// }));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, 
+            //maxAge: 3600000
+           },
+}));
 
 
 
 app.use('/login', loginRouter);
 
-app.use('/', /*authUser*/ dashboardRouter);
-app.use('/dashboard', /*authUser*/ dashboardRouter);
-app.use('/family',/* authUser*/ familyRouter);
-app.use('/add-mandal', /*authUser*/ mandalRouter);
-app.use('/member', /*authUser*/ memberRouter);
-app.use('/action', /*authUser*/ actionRouter);
-app.use('/print',printRouter);
+app.use('/', authUser, dashboardRouter);
+app.use('/dashboard', authUser, dashboardRouter);
+app.use('/family', authUser, familyRouter);
+app.use('/add-mandal', authUser, mandalRouter);
+app.use('/member', authUser, memberRouter);
+app.use('/action', authUser, actionRouter);
+app.use('/print',authUser,printRouter);
 
 module.exports = app;
 
