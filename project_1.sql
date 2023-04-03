@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 11:42 AM
+-- Generation Time: Apr 02, 2023 at 07:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,21 +45,74 @@ INSERT INTO `admin` (`username`, `password`, `created_at`, `updated_at`, `delete
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category`) VALUES
+(1, 'ND'),
+(2, 'SN'),
+(3, 'NR'),
+(4, 'S'),
+(5, 'SS'),
+(6, 'SK'),
+(7, 'GK'),
+(8, 'SSPN'),
+(9, 'IT'),
+(10, 'KOS'),
+(11, 'DN'),
+(12, 'none');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `change_id`
+--
+
+CREATE TABLE `change_id` (
+  `id` int(11) NOT NULL,
+  `change` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `change_id`
+--
+
+INSERT INTO `change_id` (`id`, `change`) VALUES
+(1, '2'),
+(2, '4'),
+(3, '7'),
+(4, '15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `devotee`
 --
 
 CREATE TABLE `devotee` (
   `id` int(11) NOT NULL,
   `mandal_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `birthdate` date DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `relation_id` int(11) NOT NULL DEFAULT 1,
   `occupation_id` int(11) DEFAULT NULL,
+  `company_name` varchar(255) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `study_id` int(11) DEFAULT NULL,
   `shift_id` int(11) DEFAULT NULL,
+  `change_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -69,25 +122,8 @@ CREATE TABLE `devotee` (
 -- Dumping data for table `devotee`
 --
 
-INSERT INTO `devotee` (`id`, `mandal_id`, `name`, `birthdate`, `age`, `relation_id`, `occupation_id`, `phone_number`, `address`, `study_id`, `shift_id`, `created_at`, `deleted_at`, `updated_at`) VALUES
-(1, 1, 'Kirtan J Limbachiya', '2001-06-22', 21, 1, 2, '9106617646', 'tuldiham', 13, NULL, '2023-03-09 14:21:45', NULL, NULL),
-(2, 1, 'test2', '2023-03-08', 0, 1, 2, '1212121212', 'ghghghghgh', 3, NULL, '2023-03-09 14:30:48', '2023-03-09 14:31:57', NULL),
-(3, 1, 'test2', '2023-03-09', 0, 1, 4, '54554545', 'tulsidham', 13, NULL, '2023-03-09 15:10:27', '2023-03-09 15:10:29', NULL),
-(4, 2, 'Jayveersinh Mahida', '2002-05-04', 20, 1, 1, '1212121212', 'tuldiham', 13, NULL, '2023-03-09 15:11:45', '2023-03-10 10:36:30', NULL),
-(5, 3, 'family 1', '2001-06-18', 21, 1, 1, '54554545', 'sdsdsd', 12, NULL, '2023-03-10 10:31:41', NULL, NULL),
-(6, 3, 'family 2', '2016-06-08', 6, 1, 2, '1212121212', 'sdsdsd', 3, NULL, '2023-03-10 10:42:26', NULL, NULL),
-(7, 3, 'family 3', '2010-02-02', 13, 1, 2, '54554545', 'tuldiham', 3, NULL, '2023-03-10 10:44:39', '2023-03-10 11:02:58', NULL),
-(8, 3, 'family 4', '0000-00-00', 14, 1, 3, '8734866391', 'Luvkush appartment', 14, NULL, '2023-03-10 11:01:33', '2023-03-10 11:03:01', NULL),
-(9, 3, 'family 5', '0000-00-00', 19, 1, 1, '1212121212', 'Luvkush appartment', 11, NULL, '2023-03-10 11:02:10', '2023-03-10 11:02:56', NULL),
-(10, 3, 'family6', '0000-00-00', 22, 1, 3, '8585858585', 'Luvkush appartment', 6, NULL, '2023-03-10 11:03:24', '2023-03-10 11:51:21', NULL),
-(11, 3, 'family 7 ', '0000-00-00', 23, 1, 3, '1212121212', 'Luvkush appartment', 3, NULL, '2023-03-10 11:17:22', '2023-03-10 11:51:24', NULL),
-(12, 3, 'family 8', '2003-02-26', 20, 1, 3, '54554545', 'Luvkush appartment', 9, NULL, '2023-03-10 11:35:05', '2023-03-10 11:51:26', NULL),
-(13, 3, 'family 9 ', '0000-00-00', -1, 1, 4, '8585858585', 'sdsdsd', 14, NULL, '2023-03-10 11:36:41', '2023-03-10 11:51:20', NULL),
-(14, 3, 'family 10', NULL, 23, 1, 4, '8585858585', 'sdsdsd', 14, NULL, '2023-03-10 11:47:51', '2023-03-10 11:51:28', NULL),
-(15, 3, 'family 11', NULL, 24, 1, 4, '8734866391', 'shaktinath', 14, NULL, '2023-03-10 11:48:29', '2023-03-10 11:51:17', NULL),
-(16, 3, 'family14', NULL, 12, 1, 2, '', 'tulsidham', 4, NULL, '2023-03-10 11:51:54', NULL, NULL),
-(17, 3, 'family 15', '2007-02-28', 16, 1, 4, '54554545', 'ghghghghgh', 14, NULL, '2023-03-10 11:57:21', NULL, NULL),
-(18, 3, 'family 26', '2005-07-07', 17, 1, 4, '54554545', 'ghghghghgh', 14, NULL, '2023-03-10 11:59:58', '2023-03-10 12:36:23', NULL);
+INSERT INTO `devotee` (`id`, `mandal_id`, `category_id`, `name`, `birthdate`, `age`, `relation_id`, `occupation_id`, `company_name`, `phone_number`, `address`, `study_id`, `shift_id`, `change_id`, `created_at`, `deleted_at`, `updated_at`) VALUES
+(1, 1, 5, 'Kirtan J Limbachiya', '2001-06-22', 21, 1, 4, '', '9106617646', 'Luvkush appartment', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -98,6 +134,8 @@ INSERT INTO `devotee` (`id`, `mandal_id`, `name`, `birthdate`, `age`, `relation_
 CREATE TABLE `devotee_family` (
   `id` int(11) NOT NULL,
   `devotee_id` int(11) NOT NULL,
+  `mandal_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `relation_id` int(11) NOT NULL DEFAULT 1,
   `birthdate` date DEFAULT NULL,
@@ -105,8 +143,10 @@ CREATE TABLE `devotee_family` (
   `address` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `occupation_id` int(11) DEFAULT 4,
+  `company_name` varchar(255) NOT NULL,
   `study_id` int(11) DEFAULT 14,
   `shift_id` int(11) DEFAULT NULL,
+  `change_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -116,27 +156,9 @@ CREATE TABLE `devotee_family` (
 -- Dumping data for table `devotee_family`
 --
 
-INSERT INTO `devotee_family` (`id`, `devotee_id`, `name`, `relation_id`, `birthdate`, `age`, `address`, `phone_number`, `occupation_id`, `study_id`, `shift_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'Kirtan J Limbachiya', 1, '2001-06-22', 21, 'tuldiham', '9106617646', 2, 13, NULL, '2023-03-09 14:21:45', NULL, NULL),
-(2, 2, 'test2', 1, '2023-03-08', 0, 'ghghghghgh', '1212121212', 2, 3, NULL, '2023-03-09 14:30:48', NULL, '2023-03-09 14:31:57'),
-(3, 1, 'Member 1', 9, '2008-06-09', 14, 'tuldiham', '54554545', 4, 12, NULL, '2023-03-09 14:47:53', '2023-03-09 15:06:07', '2023-03-09 15:09:40'),
-(4, 2, 'test2', 1, '2023-03-09', 0, 'tulsidham', '54554545', 4, 13, NULL, '2023-03-09 15:10:27', NULL, NULL),
-(5, 4, 'Jayveersinh Mahida', 1, '2002-05-04', 20, 'tuldiham', '1212121212', 1, 13, NULL, '2023-03-09 15:11:45', NULL, '2023-03-10 10:36:30'),
-(6, 5, 'family 1', 1, '2001-06-18', 21, 'sdsdsd', '54554545', 1, 12, NULL, '2023-03-10 10:31:41', NULL, NULL),
-(7, 6, 'family 2', 1, '2016-06-08', 6, 'sdsdsd', '1212121212', 2, 3, NULL, '2023-03-10 10:42:26', NULL, NULL),
-(8, 7, 'family 3', 1, '2010-02-02', 13, 'tuldiham', '54554545', 2, 3, NULL, '2023-03-10 10:44:39', NULL, '2023-03-10 11:02:58'),
-(9, 8, 'family 4', 1, '0000-00-00', 14, 'Luvkush appartment', '8734866391', 3, 14, NULL, '2023-03-10 11:01:33', NULL, '2023-03-10 11:03:01'),
-(10, 9, 'family 5', 1, '0000-00-00', 19, 'Luvkush appartment', '1212121212', 1, 11, NULL, '2023-03-10 11:02:10', NULL, '2023-03-10 11:02:56'),
-(11, 10, 'family6', 1, '0000-00-00', 22, 'Luvkush appartment', '8585858585', 3, 6, NULL, '2023-03-10 11:03:24', NULL, '2023-03-10 11:51:21'),
-(12, 11, 'family 7 ', 1, '0000-00-00', 23, 'Luvkush appartment', '1212121212', 3, 3, NULL, '2023-03-10 11:17:22', NULL, '2023-03-10 11:51:24'),
-(13, 12, 'family 8', 1, '2003-02-26', 20, 'Luvkush appartment', '54554545', 3, 9, NULL, '2023-03-10 11:35:05', NULL, '2023-03-10 11:51:26'),
-(14, 13, 'family 9 ', 1, '0000-00-00', -1, 'sdsdsd', '8585858585', 4, 14, NULL, '2023-03-10 11:36:41', NULL, '2023-03-10 11:51:20'),
-(15, 14, 'family 10', 1, NULL, 23, 'sdsdsd', '8585858585', 4, 14, NULL, '2023-03-10 11:47:51', NULL, '2023-03-10 11:51:28'),
-(16, 15, 'family 11', 1, NULL, 24, 'shaktinath', '8734866391', 4, 14, NULL, '2023-03-10 11:48:29', NULL, '2023-03-10 11:51:17'),
-(17, 16, 'family14', 1, NULL, 12, 'tulsidham', '', 2, 4, NULL, '2023-03-10 11:51:54', NULL, NULL),
-(18, 17, 'family 15', 1, '2007-02-28', 16, 'ghghghghgh', '54554545', 4, 14, NULL, '2023-03-10 11:57:21', NULL, NULL),
-(19, 18, 'family 26', 1, '2005-07-07', 17, 'ghghghghgh', '54554545', 4, 14, NULL, '2023-03-10 11:59:58', NULL, '2023-03-10 12:36:23'),
-(20, 5, 'member 45', 9, '2023-03-16', -1, 'tulsidham', '8734866391', 4, 14, NULL, '2023-03-10 12:17:53', NULL, '2023-03-10 12:27:32');
+INSERT INTO `devotee_family` (`id`, `devotee_id`, `mandal_id`, `category_id`, `name`, `relation_id`, `birthdate`, `age`, `address`, `phone_number`, `occupation_id`, `company_name`, `study_id`, `shift_id`, `change_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 5, 'Kirtan J Limbachiya', 1, '2001-06-22', 21, 'Luvkush appartment', '9106617646', 4, '', 13, 5, 4, '2023-04-02 20:15:33', NULL, NULL),
+(2, 1, 1, 6, 'Jagdishbhai', 2, '1973-10-05', 49, 'Luvkush appartment', '8734866391', 1, 'Sanofi', 14, 2, 4, '2023-04-02 20:50:20', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -235,8 +257,9 @@ CREATE TABLE `shift` (
 INSERT INTO `shift` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'first', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'second', NULL, NULL, NULL),
-(3, 'general', NULL, NULL, NULL),
-(4, 'none', NULL, NULL, NULL);
+(3, 'night', NULL, NULL, NULL),
+(4, 'general', NULL, NULL, NULL),
+(5, 'none', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -277,6 +300,18 @@ INSERT INTO `study` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VAL
 --
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `change_id`
+--
+ALTER TABLE `change_id`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `devotee`
 --
 ALTER TABLE `devotee`
@@ -285,7 +320,9 @@ ALTER TABLE `devotee`
   ADD KEY `occupation_foreign_key` (`occupation_id`),
   ADD KEY `study_foreign_key` (`study_id`),
   ADD KEY `shift_id_foreign_key` (`shift_id`),
-  ADD KEY `relation_id_foriegn_key` (`relation_id`);
+  ADD KEY `relation_id_foriegn_key` (`relation_id`),
+  ADD KEY `change_id_foreign_key` (`change_id`),
+  ADD KEY `category_id_foriegn_key` (`category_id`);
 
 --
 -- Indexes for table `devotee_family`
@@ -296,7 +333,9 @@ ALTER TABLE `devotee_family`
   ADD KEY `relation_foreign_key` (`relation_id`),
   ADD KEY `occupation_foreign_key` (`occupation_id`),
   ADD KEY `shift_foreign_key` (`shift_id`),
-  ADD KEY `study_foreign_key` (`study_id`);
+  ADD KEY `study_foreign_key` (`study_id`),
+  ADD KEY `change_foreign_key` (`change_id`),
+  ADD KEY `category_id2_foriegn_key` (`category_id`);
 
 --
 -- Indexes for table `mandal`
@@ -333,16 +372,28 @@ ALTER TABLE `study`
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `change_id`
+--
+ALTER TABLE `change_id`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `devotee`
 --
 ALTER TABLE `devotee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `devotee_family`
 --
 ALTER TABLE `devotee_family`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mandal`
@@ -366,7 +417,7 @@ ALTER TABLE `relation`
 -- AUTO_INCREMENT for table `shift`
 --
 ALTER TABLE `shift`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `study`
@@ -382,6 +433,8 @@ ALTER TABLE `study`
 -- Constraints for table `devotee`
 --
 ALTER TABLE `devotee`
+  ADD CONSTRAINT `category_id_foriegn_key` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
+  ADD CONSTRAINT `change_id_foreign_key` FOREIGN KEY (`change_id`) REFERENCES `change_id` (`id`),
   ADD CONSTRAINT `occupation_id_foriegn_key` FOREIGN KEY (`occupation_id`) REFERENCES `occupation` (`id`),
   ADD CONSTRAINT `relation_id_foriegn_key` FOREIGN KEY (`relation_id`) REFERENCES `relation` (`id`),
   ADD CONSTRAINT `shift_id_foreign_key` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`id`),
@@ -391,6 +444,8 @@ ALTER TABLE `devotee`
 -- Constraints for table `devotee_family`
 --
 ALTER TABLE `devotee_family`
+  ADD CONSTRAINT `category_id2_foriegn_key` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
+  ADD CONSTRAINT `change_foreign_key` FOREIGN KEY (`change_id`) REFERENCES `change_id` (`id`),
   ADD CONSTRAINT `occupation_id2_foriegn_key` FOREIGN KEY (`occupation_id`) REFERENCES `occupation` (`id`),
   ADD CONSTRAINT `relation_id2_foriegn_key` FOREIGN KEY (`relation_id`) REFERENCES `relation` (`id`),
   ADD CONSTRAINT `shift_id2_foriegn_key` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`id`),
