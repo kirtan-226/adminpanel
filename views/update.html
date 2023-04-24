@@ -4,88 +4,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style3.css">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> 
+  
+  
+    <title>Edit</title>
 </head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style2.css">
 <body>
+
+   <nav class="navbar navbar-expand-lg bg-body-light navbar-custom" style="background-color: bisque">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/images/logo.png" alt="Bootstrap" width="40" height="50" class="d-inline-block align-text-top-my-10">
+            <b>Swaminaraya Mandir Bharuch</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            
+                  <!-- <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Projects</a>
+                  </li> -->
+
+  
+                    
+            </div>
+      </nav>
+
+    <div class="container">
+        <h2>Edit</h2>
+        <div class="card">
+            
+            <div id="myForm">        
     <form action="/action/update" method="post">
+        <div class="card-body">
     <input type="hidden" id="id" name="id" value="<%=id%>" readonly><br>
-    <label for="name">Enter head_name:</label>
-    <input type="text" id="name" name="name" value="<%=devotee.name%>"><br>
+    
         <label for="category_id">category</label>
-        <select name="category_id" id="category_id" value="<%=devotee.category%>">
+        <select name="category_id" id="category_id" value="<%=html_data.category%>">
             <option value="">Select</option>
-            <option value="1">ND</option>
-            <option value="2">SN</option>
-            <option value="3">NR</option>
-            <option value="4">S</option>
-            <option value="5">SS</option>
-            <option value="6">SK</option>
-            <option value="7">GK</option>
-            <option value="8">SSPN</option>
-            <option value="9">IT</option>
-            <option value="10">KOS</option>
-            <option value="11">DN</option>
-            <option value="12">None</option><br>
+            <option value="1" <%= html_data.category == '1' ? 'selected' : '' %>>ND</option>
+            <option value="2" <%= html_data.category == '2' ? 'selected' : '' %>>SN</option>
+            <option value="3" <%= html_data.category == '3' ? 'selected' : '' %>>NR</option>
+            <option value="4" <%= html_data.category == '4' ? 'selected' : '' %>>S</option>
+            <option value="5" <%= html_data.category == '5' ? 'selected' : '' %>>SS</option>
+            <option value="6" <%= html_data.category == '6' ? 'selected' : '' %>>SK</option>
+            <option value="7" <%= html_data.category == '7' ? 'selected' : '' %>>GK</option>
+            <option value="8" <%= html_data.category == '8' ? 'selected' : '' %>>SSPN</option>
+            <option value="9" <%= html_data.category == '9' ? 'selected' : '' %>>IT</option>
+            <option value="10" <%= html_data.category == '10' ? 'selected' : '' %>>KOS</option>
+            <option value="11" <%= html_data.category == '11' ? 'selected' : '' %>>DN</option>
+            <option value="12" <%= html_data.category == '12' ? 'selected' : '' %>>None</option><br>
         </select>
        <br> <label for="birthdate">Enter birthdate</label>
-        <input type="date" id="birthdate" name="birthdate" value="<%=devotee.birthdate%>"><br>
+        <input type="date" id="birthdate" name="birthdate" value="<%=html_data.birthdate%>"><br>
         <label for="occupation">occupation</label>
-        <select name="occupation_id" id="occupation_id" value="<%=devotee.occupation%>"required>
+        <select name="occupation_id" id="occupation_id" value="<%=html_data.occupation%>"required>
             <option value="">Select</option>
-            <option value="1">Job</option>
-            <option value="2">Business</option> 
-            <option value="3">Housewife</option>
-            <option value="4">Study</option>
-            <option value="5">None</option>
+            <option value="1" <%= html_data.category == '1' ? 'selected' : '' %>>Job</option>
+            <option value="2" <%= html_data.category == '2' ? 'selected' : '' %>>Business</option> 
+            <option value="3" <%= html_data.category == '3' ? 'selected' : '' %>>Housewife</option>
+            <option value="4" <%= html_data.category == '4' ? 'selected' : '' %>>Study</option>
+            <option value="5" <%= html_data.category == '5' ? 'selected' : '' %>>None</option>
         </select><br>
         <div id="shift_id" style="display:none;">
           <label for="company_name">company_name</label>
-          <input type="text" id="company_name" name ="company_name" value="<%=devotee.company_name%>"><br>
+          <input type="text" id="company_name" name ="company_name" value="<%=html_data.company_name%>"><br>
             <label for="shift_id">Enter shift:</label>
-            <select name="shift_id" id="shift_id" value="<%=devotee.shift%>">
+            <select name="shift_id" id="shift_id" value="<%=html_data.shift%>">
                 <option value="5">Select</option>
-                <option value="1">first</option>
-                <option value="2">second</option>
-                <option value="3">night</option>
-                <option value="4">general</option>
+                <option value="1" <%= html_data.category == '1' ? 'selected' : '' %>>first</option>
+                <option value="2" <%= html_data.category == '2' ? 'selected' : '' %>>second</option>
+                <option value="3" <%= html_data.category == '3' ? 'selected' : '' %>>night</option>
+                <option value="4" <%= html_data.category == '4' ? 'selected' : '' %>>general</option>
             </select><br>
             <label for="change_id">enter time for change</label>
-            <select name="change_id" id="change_id" value="<%=devotee.change%>">
+            <select name="change_id" id="change_id" value="<%=html_data.change%>">
               <option value="4">select</option>
-              <option value="1">week</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="1" <%= html_data.category == '1' ? 'selected' : '' %>>week</option>
+              <option value="2" <%= html_data.category == '2' ? 'selected' : '' %>>2</option>
+              <option value="3" <%= html_data.category == '3' ? 'selected' : '' %>>3</option>
             </select><br>
             </select>
         </div>
     
         <div id="study_id" style="display:none;">
             <label for="study_id">Enter study ID:</label>
-            <select name="study_id" id="study_id" value="<%=devotee.study%>">
+            <select name="study_id" id="study_id" value="<%=html_data.study%>">
                 <option value="14">Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">Graduation/post-graduation</option>
+                <option value="1" <%= html_data.category == '1' ? 'selected' : '' %>>1</option>
+                <option value="2" <%= html_data.category == '2' ? 'selected' : '' %>>2</option>
+                <option value="3" <%= html_data.category == '3' ? 'selected' : '' %>>3</option>
+                <option value="4" <%= html_data.category == '4' ? 'selected' : '' %>>4</option>
+                <option value="5" <%= html_data.category == '5' ? 'selected' : '' %>>5</option>
+                <option value="6" <%= html_data.category == '6' ? 'selected' : '' %>>6</option>
+                <option value="7" <%= html_data.category == '7' ? 'selected' : '' %>>7</option>
+                <option value="8" <%= html_data.category == '8' ? 'selected' : '' %>>8</option>
+                <option value="9" <%= html_data.category == '9' ? 'selected' : '' %>>9</option>
+                <option value="10" <%= html_data.category == '10' ? 'selected' : '' %>>10</option>
+                <option value="11" <%= html_data.category == '11' ? 'selected' : '' %>>11</option>
+                <option value="12" <%= html_data.category == '12' ? 'selected' : '' %>>12</option>
+                <option value="13" <%= html_data.category == '13' ? 'selected' : '' %>>Graduation/post-graduation</option>
             </select><br>
         </div>
     
         <label for="address">Enter address:</label>
-        <input type="text" id="address" name="address" value="<%=devotee.address%>"><br>
+        <input type="text" id="address" name="address" value="<%=html_data.address%>"><br>
         <label for="phone_number">Enter phone number:</label>
-        <input type="text" id="phone_number" name="phone_number" value="<%=devotee.phone_number%>"" required pattern="[789][0-9]{9}">
-        <input type="submit">
+        <input type="text" id="phone_number" name="phone_number" value="<%=html_data.phone_number%>"" required pattern="[789][0-9]{9}">
+    </div>
+        <div class="card-footer">
+        <input type="submit" id="submitBtn">
+        </div>
       </form>
+            </div>
+            </div>
+        </div>
+    
+    
         <script>
             // Show/hide dropdown based on selected option
             const occupationDropdown = document.getElementById("occupation_id");
@@ -104,7 +148,12 @@
                     studyDropdown.style.display = "none";
                 }
               })
+
+              
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"></script>
 
 </body>
 </html>

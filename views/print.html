@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	
+</head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style2.css">
+<body>
+
+	<nav class="navbar navbar-expand-lg bg-body-light navbar-custom" style="background-color: bisque">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#">
+			<img src="/images/logo.png" alt="Bootstrap" width="40" height="50" class="d-inline-block align-text-top-my-10">
+				<b>Swaminaraya Mandir Bharuch</b></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>   
+	  </nav>
+
+	  <div class="container">
+        <h2>Print</h2>
+        <div class="card">
+	<form action="/print" method="post">
+		<label for="mandal_id">mandal</label>
+		<select name="mandal_id" id="mandal_id">
+		  <option value="0">SELECT</option>
+		  <% mandals.forEach((mandal, i) => { %>
+			<option value="<%= mandal_id[i] %>"><%= mandal %></option>
+		  <% }); %>
+		</select><br>
+	  
+		<label for="category_id">category</label>
+		<select name="category_id" id="category_id">
+		  <option value="0">SELECT</option>
+		  <% categories.forEach((name, i) => { %>
+			<option value="<%= category_id[i] %>"><%= name %></option>
+		  <% }); %>
+		</select><br>
+	  
+	  <label for="name">name</label>
+	  <input type="checkbox" id="name" name="name" value="true"><br>
+      <div id="nameInputDiv" style="display:none;">
+		<input type="text" id="nameInput" name="nameInput" placeholder="Enter your name">
+	  </div><br>
+
+	  <label for="company_name">company_name</label>
+	  <input type="checkbox" id="company_name" name="company_name" value="true"><br>
+      <div id="company_nameInputDiv" style="display:none;">
+		<input type="text" id="company_nameInput" name="company_nameInput" placeholder="Enter company_name">
+	  </div><br>
+	  <label for="phone">Phone</label>
+	  <input type="checkbox" id="phone" name="phone" value="true"><br>
+	  <label for="address">address</label>
+	  <input type="checkbox" id="address" name="address" value="true"><br>
+	  <input type="submit" value="Print Selected Fields"><br>
+	</form>
+
+		</div>
+	  </div>
+  </body>
+  <script>
+	const nameCheckbox = document.getElementById("name");
+	const nameInputDiv = document.getElementById("nameInputDiv");
+	const company_nameCheckbox = document.getElementById("company_name");
+	const company_nameInputDiv = document.getElementById("company_nameInputDiv");
+
+	nameCheckbox.addEventListener("change", function() {
+	  if (nameCheckbox.checked) {
+		nameInputDiv.style.display = "block";
+	  } else {
+		nameInputDiv.style.display = "none";
+	  }
+	});
+
+	company_nameCheckbox.addEventListener("change", function() {
+	  if (company_nameCheckbox.checked) {
+		company_nameInputDiv.style.display = "block";
+	  } else {
+		company_nameInputDiv.style.display = "none";
+	  }
+	});
+
+	</script>
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+	 integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+	 crossorigin="anonymous"></script>
+	
+</html>

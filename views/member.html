@@ -1,51 +1,295 @@
-<html>
-    <head>
-      <title>Member Details</title>
-    </head>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style2.css">
-    <body>
-      <h1>Family Details</h1>
-      <a href="/member/<%=id%>/add-mem/" class="btn">add</a>
-      <td><a href="/print/<%=id%>" class="btn2">print</a></td>
-      <table>
-        <thead>
-          <tr>
-            <th>family_id</th>
-            <th>haribhakt_id</th>
-            <th>Name</th>
-            <th>category</th>
-            <th>relation</th>
-            <th>birthdate</th>
-            <th>age</th>
-            <th>occupation</th>
-            <th>company_name</th>
-            <th>study</th>
-            <th>address</th>
-            <th>phone</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-            <% html_data.forEach(row => { %>
-          <tr>
-            <td><%=row.family_id%></td>
-            <td><%=row.id%></td>
-            <td><%=row.name%></td>
-            <td><%=row.category%></td>
-            <td><%=row.relation%></td>
-            <td><%=row.birthdate%></td>
-            <td><%=row.age%></td>
-            <td><%=row.occupation%></td>
-            <td><%=row.company_name%></td>
-            <td><%=row.study%></td>
-            <td><%=row.address%></td>
-            <td><%=row.phone_number%></td>
-            <td><a href="/action/update/<%=row.id%>" class="btn2">update</a></td>
-            <td><a href="/action/delete-mem/<%=row.id%>" class="btn2">Delete</a></td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
-    </body>
-  </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> 
+
+  <title>Member Details</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style2.css">
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-light navbar-custom" style="background-color: bisque">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/images/logo.png" alt="Bootstrap" width="40" height="50" class="d-inline-block align-text-top-my-10">
+            <b>XYZ Organization</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>   
+  </nav>
+
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h1>Family Member Details</h1>
+                  </div>
+                  <div class="col-md-6 text-right" style="padding-top: 25px;">
+                    
+                    <button button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="<%=id%>">ADD</button>
+                  
+                </div>
+              </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Add your details</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body text-center">
+                  <form action="/member/add-mem" method="post">
+                    <div class="mb-3">
+                      <input type="hidden" id="devotee_id" name="devotee_id" value="<%=id%>" readonly><br>
+                    </div>
+                    <div class="mb-3">
+                      <label for="name">member name:</label>
+                      <input type="text" id="name" name="name" placeholder="member name"><br>
+                    </div>
+                    <div class="mb-3">
+                      <label for="relation_id">relation</label>
+                      <select name="relation_id" id="relation_id">
+                       
+                        <option value="2">Father</option>
+                        <option value="3">Mother</option>
+                        <option value="4">Son</option>
+                        <option value="5">Daughter</option>
+                        <option value="6">Grandfather</option>
+                        <option value="7">Grandmother</option>
+                        <option value="8">Brother</option>
+                        <option value="9">Sister</option>
+                      </select><br>
+                    </div>
+                    <div class="mb-3">
+                      <label for="category_id">category</label>
+                      <select name="category_id" id="category_id">
+                        <option value="">Select</option>
+                        <option value="1">ND</option>
+                        <option value="2">SN</option>
+                        <option value="3">NR</option>
+                        <option value="4">S</option>
+                        <option value="5">SS</option>
+                        <option value="6">SK</option>
+                        <option value="7">GK</option>
+                        <option value="8">SSPN</option>
+                        <option value="9">IT</option>
+                        <option value="10">KOS</option>
+                        <option value="11">DN</option>
+                        <option value="12">None</option><br>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <br> <label for="birthdate">Enter birthdate</label>
+                      <input type="date" id="birthdate" name="birthdate"
+                        value="<%= new Date().toISOString().substr(0, 10) %>"><br>
+                    </div>
+                    <div class="mb-3">
+                      <label for="occupation">occupation</label>
+                      <select name="occupation_id" id="occupation_id" required>
+                        <option value="">Select</option>
+                        <option value="1">Job</option>
+                        <option value="2">Business</option>
+                        <option value="3">Housewife</option>
+                        <option value="4">Study</option>
+                        <option value="5">None</option>
+                      </select><br>
+                    </div>
+
+
+                    <div id="shift_id" style="display:none;">
+                      <div class="mb-3">
+                        <label for="company_name">company_name</label>
+                        <input type="text" id="company_name" name="company_name"><br>
+                        <label for="shift_id">Enter shift:</label>
+                        <select name="shift_id" id="shift_id">
+                          <option value="5">Select</option>
+                          <option value="1">first</option>
+                          <option value="2">second</option>
+                          <option value="3">night</option>
+                          <option value="4">general</option>
+                        </select><br>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="change_id">enter time for change</label>
+                        <select name="change_id" id="change_id">
+                          <option value="4">select</option>
+                          <option value="1">week</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                        </select><br>
+                      </div>
+                      </select>
+                    </div>
+
+                    <div id="study_id" style="display:none;">
+                      <div class="mb-3">
+                        <label for="study_id">Enter study ID:</label>
+                        <select name="study_id" id="study_id">
+                          <option value="14">Select</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">Graduation/post-graduation</option>
+                        </select><br>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="address">Enter address:</label>
+                      <input type="text" id="address" name="address" placeholder="Enter address"><br>
+                    </div>
+                    <div class="mb-3">
+                      <label for="phone_number">Enter phone number:</label>
+                      <input type="text" id="phone_number" name="phone_number" placeholder="Enter phone number" required
+                        pattern="[789][0-9]{9}">
+                      <div class="mb-3">
+                        <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit">
+                    </div>
+                      </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mt-5">
+            <table class="table">
+             <thead>
+              <tr class="text-center">
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Relation</th>
+                <th>Birthdate</th>
+                <th>Age</th>
+                <th>Occupation</th>
+                <th>Company Name</th>
+                <th>Study</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+             </thead>
+          <tbody>
+            <% html_data.forEach(row=> { %>
+              <tr class="text-center" >
+                <td>
+                  <%=row.id.toString().padStart(5, '0')%>
+                </td>
+                <td>
+                  <%=row.name%>
+                </td>
+                <td>
+                  <%=row.category_name%>
+                </td>
+                <td>
+                  <%=row.relation%>
+                </td>
+                <td>
+                  <%=row.birthdate%>
+                </td>
+                <td>
+                  <%=row.age%>
+                </td>
+                <td>
+                  <%=row.occupation%>
+                </td>
+                <td>
+                  <%=row.company_name%>
+                </td>
+                <td>
+                  <%=row.study%>
+                </td>
+                <td>
+                  <%=row.address%>
+                </td>
+                <td>
+                  <%=row.phone_number%>
+                </td>
+      
+            
+                <td>
+                  
+                  <a href="/action/update/<%=row.id%>" class="text-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete">
+                    <i class="fa fa-pencil"></i> Edit
+                    </a> | 
+                    <a href="/action/delete-mem/<%=row.id%>" class="text-danger tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete">
+                    <i class="fa fa-close"></i> Delete
+                    </a>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <script>
+    // Show/hide dropdown based on selected option
+    const occupationDropdown = document.getElementById("occupation_id");
+    const shiftDropdown = document.getElementById("shift_id");
+    const studyDropdown = document.getElementById("study_id");
+
+    occupationDropdown.addEventListener("change", function () {
+      if (occupationDropdown.value === "1") {
+        shiftDropdown.style.display = "block";
+        studyDropdown.style.display = "none";
+      } else if (occupationDropdown.value === "4") {
+        studyDropdown.style.display = "block";
+        shiftDropdown.style.display = "none";
+      } else {
+        shiftDropdown.style.display = "none";
+        studyDropdown.style.display = "none";
+      }
+    })
+
+    if (exampleModal) {
+      exampleModal.addEventListener('show.bs.modal', event => {
+        // Button that triggered the modal
+        const button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        const recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an Ajax request here
+        // and then do the updating in a callback.
+
+        // Update the modal's content.
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+      })
+    }
+  </script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+ crossorigin="anonymous"></script>
+</body>
+
+</html>

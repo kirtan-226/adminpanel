@@ -25,7 +25,7 @@ router.post("/",(req,res)=>{
       if(err) throw err;
       if(results.length>0)
       {
-        // req.session.authenticated = true;
+        req.session.authenticated = true;
         res.redirect('/dashboard');
       }
       else{

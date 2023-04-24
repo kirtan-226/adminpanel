@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style3.css">
-    <title>Document</title>
+    <title>Add-family</title>
 </head>
 <body>
   <form action="/family/add-family" method="post">
@@ -14,7 +14,7 @@
     <input type="text" id="name" name="name" placeholder="Enter head name"><br>
         <label for="category_id">category</label>
         <select name="category_id" id="category_id">
-            <option value="">Select</option>
+            <option value="12">Select</option>
             <option value="1">ND</option>
             <option value="2">SN</option>
             <option value="3">NR</option>
@@ -26,7 +26,7 @@
             <option value="9">IT</option>
             <option value="10">KOS</option>
             <option value="11">DN</option>
-            <option value="12">None</option><br>
+            <br>
         </select>
        <br> <label for="birthdate">Enter birthdate</label>
         <input type="date" id="birthdate" name="birthdate" value="<%= new Date().toISOString().substr(0, 10) %>"><br>

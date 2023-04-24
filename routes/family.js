@@ -15,16 +15,16 @@ var con = mysql.createConnection({
 /* GET users listing. */
 
   router.get('/:id',(req,res,next)=>{
-    const mandal_id = req.params.id;
+    const id = req.params.id;
     let html_data = [];
     let row_data = [];
-    console.log(mandal_id)
+    
     let sql =`SELECT d.*, r.name as relation_name, o.name as occupation_name, s.name as study_name FROM devotee d 
     LEFT JOIN relation r ON r.id = d.relation_id
     LEFT JOIN occupation o ON o.id = d.occupation_id
     LEFT JOIN STUDY s ON s.id = d.study_id
     WHERE d.mandal_id = ?`;
-    con.query(sql, [mandal_id], (err, results) => {
+    con.query(sql, [id], (err, results) => {
       if (err) throw err;
       
       results.forEach(row => {
@@ -40,8 +40,8 @@ var con = mysql.createConnection({
           else return;
        }
       )
-      console.log(html_data)
-      res.render('family', { html_data ,mandal_id});
+     
+      res.render('family', { html_data ,id});
   })
   }) 
 
@@ -66,7 +66,7 @@ var con = mysql.createConnection({
    };
   
    router.post('/add-family', async (req, res) => {
-    const { mandal_id, name, birthdate,category_id,change_id,shift_id,company_name, occupation_id, study_id, phone_number, address } = req.body;
+    const { mandal_id, name, birthdate, category_id, change_id, shift_id, company_name, occupation_id, study_id, phone_number, address } = req.body;
   
     // Parse birthdate string to Date object
     const birthdayDate = new Date(birthdate);
@@ -78,7 +78,7 @@ var con = mysql.createConnection({
     const now = new Date();
   
     const sql = "INSERT INTO devotee ( `mandal_id`, `name`, `category_id`,`birthdate`, `age`, `occupation_id`,`company_name`,`shift_id`,`change_id`, `study_id`, `phone_number`, `address`, `created_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    const query = "INSERT INTO devotee_family ( `devotee_id`, `name`,`category_id`, `birthdate`, `age`, `occupation_id`,`company_name`,`shift_id`,`change_id`, `study_id`, `phone_number`, `address`, `created_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    const query = "INSERT INTO devotee_family ( `devotee_id`,`mandal_id`, `name`,`category_id`, `birthdate`, `age`, `occupation_id`,`company_name`,`shift_id`,`change_id`, `study_id`, `phone_number`, `address`, `created_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   
     con.query(sql, [mandal_id, name,category_id, birthdayDate, age, occupation_id,company_name,shift_id,change_id, study_id, phone_number, address, now], (err, results) => {
       if (err) throw err;
@@ -87,18 +87,49 @@ var con = mysql.createConnection({
     con.query("SELECT id FROM devotee WHERE name=?", [name], (err, results) => {
       const id = results[0].id;
   
-      con.query(query, [id, name,category_id, birthdayDate, age, occupation_id,company_name,shift_id,change_id, study_id, phone_number, address, now], (err, results) => {
+      con.query(query, [id,mandal_id, name,category_id, birthdayDate, age, occupation_id,company_name,shift_id,change_id, study_id, phone_number, address, now], (err, results) => {
         if (err) throw err;
       });
   
       console.log(birthdayDate);
   
-      res.redirect('/dashboard');
+      res.redirect(`/family/${mandal_id}`);
     });
   });
+
+
+  router.post('/search',(req,res) => {
+    const name = req.body.name;
+   const id = req.body.id
+    let html_data = [];
+    let row_data = [];
+    console.log(name)
+    let sql =`SELECT * FROM devotee WHERE name LIKE ?`;
+  con.query(sql, [`%${name}%`], (err, results) => {
+      if (err) throw err;
+      results.forEach(row => {
+          if(row["deleted_at"]==null){
+          row_data={
+            id: row.id ,
+            name: row.name,
+            address: row.address,
+            phone_number : row.phone_number
+          };
+          html_data.push(row_data);
+          }
+          else return;
+       }
+      )
+     console.log(html_data)
+      res.render('family', { html_data ,id});
+    });
+  })
+
   
-
-
+  router.get('/logout', (req, res) => {
+    res.cookie('loggedIn', null, { expires: new Date(0) });
+    res.redirect('/login');
+  });
 
 
   router.get('/delete/:id',async (req,res)=>{

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+
+      th {
+        background-color: #eee;
+      }
+
+      col {
+        display: table-column;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <% if (column_array.phone == '1') { %> 
+          <th>Phone</th>
+          <% } %>
+          <% if (column_array.address == '1') { %>
+          <th>Address</th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% html_data.forEach(devotee => { %>
+        <tr>
+          <td><%= devotee.name %></td>
+          <% if (column_array.phone == '1') { %>
+          <td><%= devotee.phone %></td>
+          <% } %>
+          <% if (column_array.address == '1') { %>
+          <td><%= devotee.address %></td>
+          <% } %>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
